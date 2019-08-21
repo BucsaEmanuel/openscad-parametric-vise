@@ -10,3 +10,5 @@ Added ```watcher.sh```, which basically watches the vise.scad file and it runs `
 in turn generates some renders in the ```output``` folder.
 
 You'll need ```nodemon``` for the watcher to work.
+
+![Right side view](output/right.png?raw=true "Right side view")
