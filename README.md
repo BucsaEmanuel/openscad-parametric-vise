@@ -13,3 +13,4 @@ You'll need ``` nodemon ``` for the watcher to work. Also, make the files execut
 
 ![Right side view](output/polygonBase/right.png?raw=true "Right side view")
 ![Left side view](output/polygonBase/left.png?raw=true "Left side view")
+![Top side view](output/polygonBase/top.png?raw=true "Top side view")
