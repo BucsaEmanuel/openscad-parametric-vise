@@ -5,8 +5,14 @@ $fn = $preview ? 24 : 72;
 // length, witdh, height, along with
 // rails and method of linear advance
 // (screw).
+
+// constants
+// this represents the minimum wall width around rails and screws.
+safeZone = 4;
+
+// dynamics (a.k.a. variables)
 epsilon = 8;
-viseLength = 85;
+viseLength = 100;
 viseWidth = 50;
 viseHeight = 36;
 
@@ -14,43 +20,44 @@ viseRailDiameter = 8;
 viseAdvanceScrewDiameter = 8;
 
 
-module base(vL, vW, vW, vRD, vASD) {
-	wallThickness = vL/epsilon > 6 ? vL/epsilon : 10;
-	wT = wallThickness;
+
+
+module base(viseLength, viseWidth, viseHeight, viseRailDiameter, viseAdvanceScrewDiameter) {
+	wallThickness = viseLength/epsilon > 6 ? viseLength/epsilon : 10;
 
 	difference() {
-		linear_extrude(vW) {
-			square([vL,vW]);
+		linear_extrude(viseHeight) {
+			square([viseLength,viseWidth]);
 		}
 
-		translate([vL-wT,0,wT]){
+		translate([viseLength-wallThickness,0,wallThickness]){
 			rotate([0,-90,0]) {
-				linear_extrude(vL-wT-wT) {
-					square([vW-wT,vW]);
+				linear_extrude(viseLength-wallThickness-wallThickness) {
+					square([(viseLength-wallThickness),viseWidth]);
 				}
 			}
 		}
 
-		translate([0,vW/2,vW/2]) {
+		translate([0,viseWidth/2,viseWidth/2]) {
 			rotate([0,90,0]) {
-				linear_extrude(vL) {
-					circle(d=vASD);
+				linear_extrude(viseLength) {
+					circle(d=viseAdvanceScrewDiameter);
 				}
 			}
 		}
 
-		translate([0,vW/4,vW/2]) {
+		translate([0,viseWidth/4,viseWidth/2]) {
 			rotate([0,90,0]) {
-				linear_extrude(vL) {
-					circle(d=vRD);
+				linear_extrude(viseLength) {
+					circle(d=viseRailDiameter);
 				}
 			}
 		}
 
-		translate([0,vW/4*3,vW/2]) {
+		translate([0,viseWidth/4*3,viseWidth/2]) {
 			rotate([0,90,0]) {
-				linear_extrude(vL) {
-					circle(d=vRD);
+				linear_extrude(viseLength) {
+					circle(d=viseRailDiameter);
 				}
 			}
 		}
